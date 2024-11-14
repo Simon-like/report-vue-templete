@@ -7,10 +7,19 @@ onMounted(() => {
     clearInput();
 });
 
+type OptionsItem = {
+    idstr?: string
+    id?: number
+    label?: string
+}
+
 const ReportStore = useReportStore();
-const form = ref({
+const form = ref<{
+    student_id: string
+    course: OptionsItem
+}>({
     student_id: '',
-    course_id: '',
+    course: {},
 });
 const categories = ref(['数据库', '操作系统']);
 
@@ -20,8 +29,19 @@ const addRecord = () => {
 }
 const resetForm = () => {
     form.value.student_id = '';
-    form.value.course_id = '';
+    form.value.course = {};
 }
+
+const course_options = ref<OptionsItem[]>([
+    { idstr: 'C001', label: 'ACourse' },
+    { idstr: 'C002', label: 'BCourse' },
+    { idstr: 'C003', label: 'CCourse' },
+    { idstr: 'C004', label: 'DCourse' },
+    { idstr: 'C005', label: 'ECourse' },
+    { idstr: 'C006', label: 'FCourse' },
+    { idstr: 'C007', label: 'GCourse' },
+    { idstr: 'C008', label: 'HCourse' },
+])
 </script>
 
 <template>
@@ -32,8 +52,8 @@ const resetForm = () => {
         </el-form-item>
         <el-form-item>
             <p slot="label" style="color:#fff;font-size: 18px;">选课课程</p>
-            <el-select v-model="form.course_id" placeholder="nihao">
-                <el-option v-for="category in categories" :key="category" :label="category" :value="category" />
+            <el-select v-model="form.course" placeholder="请选择课程" value-key="idstr">
+                <el-option v-for="item in course_options" :key="item.idstr" :label="item.label" :value="item" />
             </el-select>
         </el-form-item>
         <button class="big-cta-btn" type="submit">一键录入</button>
