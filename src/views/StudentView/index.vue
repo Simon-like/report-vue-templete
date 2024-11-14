@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import IncomeForm from './IncomeForm.vue';
 import RecordStudentList from './RecordStudentList.vue';
 import SearchLine from './SearchLine.vue';
+import { api } from '@/api/index';
+
+onMounted(api.getStudentInfo__All);
 </script>
 
 <template>

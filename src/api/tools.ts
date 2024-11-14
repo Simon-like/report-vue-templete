@@ -3,7 +3,7 @@
  */
 
 import type { AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import { ElMessage } from "element-plus/lib/components/index.js";
+import { ElMessage } from "element-plus";
 
 // 请求拦截==========================================================
 /**
