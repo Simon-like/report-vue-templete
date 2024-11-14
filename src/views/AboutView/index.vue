@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * @description 样例组件
+ */
 import { ref, onMounted } from 'vue'
 import Report from '@/components/Report.vue';
 import IncomeExpenseForm from '@/components/IncomeExpenseForm.vue';

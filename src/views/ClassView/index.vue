@@ -29,15 +29,15 @@ import SearchLine from './SearchLine.vue';
     grid-template-columns: 1fr 2fr;
     user-select: none;
     min-height: 80%;
+    column-gap: 50px;
 
     .income {
         justify-content: center;
         gap: 60px;
         padding: 50px;
-        border-left: 2px solid #fff;
-        border-top: 2px solid #fff;
+        border: 2px solid #fff;
         box-shadow: -10px -10px 10px rgba(0, 0, 0, .3);
-        border-radius: 20px 0 0 0;
+        border-radius: 20px;
         animation: sideInLeft 1s ease-out forwards;
     }
 

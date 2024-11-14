@@ -8,7 +8,7 @@ import SearchLine from './SearchLine.vue';
     <section>
         <div class="simon-section-container">
             <div class="simon-content">
-                <div class="y-wrapper">
+                <div class="income y-wrapper">
                     <h3>学生信息管理</h3>
                     <IncomeForm />
                 </div>
@@ -27,7 +27,17 @@ import SearchLine from './SearchLine.vue';
     padding: 40px;
     display: grid;
     grid-template-columns: 1fr 2fr;
+    column-gap: 50px;
     user-select: none;
+
+    .income {
+        justify-content: center;
+        padding: 50px;
+        border: 2px solid #fff;
+        box-shadow: -10px -10px 10px rgba(0, 0, 0, .3);
+        border-radius: 20px;
+        animation: sideInLeft 1s ease-out forwards;
+    }
 
     h3 {
         font-size: 2rem;
