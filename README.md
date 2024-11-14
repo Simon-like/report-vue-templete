@@ -15,6 +15,13 @@ vite.config.ts里面可以修改运行时的端口号port
    * 若想多开一个自己的报表组件，请直接复制StudentView文件并修改相应名称作为新的报表组件，在router文件夹里的index.ts文件里新增新报表组件的index.vue相对路径，再到components文件夹里的Header.vue组件里面修改导航对象信息  
 ![image](https://github.com/user-attachments/assets/b7404cfa-0167-4f49-80cb-271284c9c4ef)
 ![bb1440e2-70ec-4679-ade8-52b9f90b348f(1)](https://github.com/user-attachments/assets/0cd243e7-3842-4e97-8e42-0082e1348bae)
+3. 网络接口部分特别说明：
+   * 本人闲的蛋疼对AXIOS进行了比较繁琐的ts封装，看不懂也没关系，只需要看几个地方
+![image](https://github.com/user-attachments/assets/b4d68088-c105-4d57-9038-7f550438d5ec)  
+在.env文件（此处不同后缀表示不同运行环境）中修改服务器地址，本地的或者远程的IP地址，跨域问题请后端自行添加注解
+![f749fffa-0fa8-4a55-b232-016551ce9a18(1)](https://github.com/user-attachments/assets/7278dc33-919d-42c4-9588-d55e91b441f6)  
+对于一个快速搭建报表页面的项目，这个api封装确实是整的复杂了（写ts上瘾啦，略略略），大家只需关注path文件里的具体接口填写，写完导入到index.ts出口文件里即可，然后在具体页面里面使用index.ts导出的api(具体接口可以以方法形式.点出来)，SIMON尽力在里面写能让大家都看懂的注释。。。。。。。
+
 
 
 
