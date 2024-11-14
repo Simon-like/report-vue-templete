@@ -1,20 +1,31 @@
 <script setup lang="ts">
-import { ref, computed, defineProps } from 'vue';
-const props = defineProps({
-    records: {
-        type: Array,
-        required: true,
-    }
-})
+import type { StudentInfo } from '@/types/databaseWeb';
+import { ref, computed, defineProps, defineEmits } from 'vue';
+const props = defineProps<{
+    records: StudentInfo[]
+}>()
+
+const emits = defineEmits(['delete'])
+
+const handleDelete = (index: number) => {
+    emits('delete', props.records[index].student_id);
+}
 </script>
 
 <template>
     <el-table :data="props.records">
         <el-table-column prop="student_id" label="学号" />
         <el-table-column prop="student_name" label="姓名" />
-        <el-table-column prop="sex" label="性别" />
-        <el-table-column prop="major_name" label="院系" />
-        <el-table-column prop="college_name" label="学院" />
+        <el-table-column prop="sex_name" label="性别" />
+        <el-table-column prop="major_id" label="院系" />
+        <el-table-column prop="college_id" label="学院" />
+        <el-table-column label="Operations">
+            <template #default="scope">
+                <el-button size="small" type="danger" @click="handleDelete(scope.$index)">
+                    Delete
+                </el-button>
+            </template>
+        </el-table-column>
     </el-table>
 </template>
 
@@ -35,5 +46,18 @@ const props = defineProps({
 
 :deep(.el-table__inner-wrapper) {
     border-radius: 20px;
+}
+
+:deep(.cell) {
+    color: #fff;
+    font-size: 16px;
+    transition: .2s ease;
+
+}
+
+:deep(.el-table__body tr:hover>td.el-table__cell) {
+    .cell {
+        color: #000;
+    }
 }
 </style>

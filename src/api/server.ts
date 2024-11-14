@@ -3,7 +3,7 @@
  */
 
 import axios from "axios";
-import type { FcResponse, IAnyObj } from "@/types/axios";
+import type { FcResponse, IAnyObj, ApiResponse } from "@/types/axios";
 
 import {
   handleRequestHeader,
@@ -53,7 +53,7 @@ export const Get = <T>(
   url: string,
   params: IAnyObj = {},
   clearFn?: Fn
-): Promise<[any, FcResponse<T> | undefined]> =>
+): ApiResponse<T> =>
   new Promise((resolve) => {
     instance
       .get(url, { params })
@@ -64,10 +64,10 @@ export const Get = <T>(
         } else {
           res = result.data as FcResponse<T>;
         }
-        resolve([null, res as FcResponse<T>]);
+        resolve(res as FcResponse<T>);
       })
       .catch((err) => {
-        resolve([err, undefined]);
+        resolve(err);
       });
   });
 
@@ -82,15 +82,15 @@ export const Post = <T>(
   url: string,
   data: IAnyObj,
   params: IAnyObj = {}
-): Promise<[any, FcResponse<T> | undefined]> => {
+): ApiResponse<T> => {
   return new Promise((resolve) => {
     instance
       .post(url, data, { params })
       .then((result) => {
-        resolve([null, result.data as FcResponse<T>]);
+        resolve(result.data as FcResponse<T>);
       })
       .catch((err) => {
-        resolve([err, undefined]);
+        resolve(err);
       });
   });
 };
@@ -106,15 +106,15 @@ export const Put = <T>(
   url: string,
   data: IAnyObj,
   params: IAnyObj = {}
-): Promise<[any, FcResponse<T> | undefined]> => {
+): ApiResponse<T> => {
   return new Promise((resolve) => {
     instance
       .put(url, data, { params })
       .then((result) => {
-        resolve([null, result.data as FcResponse<T>]);
+        resolve(result.data as FcResponse<T>);
       })
       .catch((err) => {
-        resolve([err, undefined]);
+        resolve(err);
       });
   });
 };
@@ -130,7 +130,7 @@ export const Delete = <T>(
   url: string,
   params: IAnyObj = {},
   clearFn?: Fn
-): Promise<[any, FcResponse<T> | undefined]> =>
+): ApiResponse<T> =>
   new Promise((resolve) => {
     instance
       .delete(url, { params })
@@ -141,9 +141,9 @@ export const Delete = <T>(
         } else {
           res = result.data as FcResponse<T>;
         }
-        resolve([null, res as FcResponse<T>]);
+        resolve(res as FcResponse<T>);
       })
       .catch((err) => {
-        resolve([err, undefined]);
+        resolve(err);
       });
   });

@@ -26,6 +26,7 @@ export type CourseInfo = {
  * 选课信息类型
  */
 export type SCInfo = {
+  id: number;
   student_name: string;
   sex: number;
   course_name: string;

@@ -21,4 +21,4 @@ export type IAnyObj = {
 /**
  * Promise处理后的响应数据类型
  */
-export type ApiResponse<T> = Promise<[any, FcResponse<T> | undefined]>;
+export type ApiResponse<T> = Promise<FcResponse<T>>;

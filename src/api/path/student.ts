@@ -38,8 +38,8 @@ async function getStudentInfo__All(): ApiResponse<StudentInfo[]> {
  * @param data 学生信息对象
  * @returns
  */
-async function postStudentInfo(data: StudentInfo) {
-  return await Post("/student", data);
+async function postStudentInfo(data: StudentInfo): ApiResponse<any> {
+  return await Post<any>("/student", data);
 }
 //对于post请求，通常把数据打包到一个对象里放到请求体body里面，此处对对象做了类型定义格式为:
 // type StudentInfo = {
@@ -56,7 +56,7 @@ async function postStudentInfo(data: StudentInfo) {
  * @returns
  */
 async function deleteStudentInfo(student_id: string) {
-  return await Delete(`/student?student_id=${student_id}`);
+  return await Delete(`/student/${student_id}`);
 }
 
 // 最后不要忘了导出
