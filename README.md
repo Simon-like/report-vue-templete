@@ -5,13 +5,14 @@
 1. 项目快速运行
    * 请确已经下载node
    * pnpm: 下载相关依赖：\`pnpm install\` 运行项目：\`pnpm run dev\`
-   * npm:  下载相关依赖：\`npm install\` 运行项目：\`npm run dev\`
-2. 项目主要结构：  
+   * npm:  下载相关依赖：\`npm install\` 运行项目：\`npm run dev\`  
+![image](https://github.com/user-attachments/assets/61e93141-be4e-4e68-8a26-ba723d3c52b7)  
+vite.config.ts里面可以修改运行时的端口号port
+2. 项目主要结构以及页面修改：  
 ![dbeba565-3687-4008-8516-fd2447e5f310(1)](https://github.com/user-attachments/assets/33d906a5-bf66-49b4-bdf3-97fe66ecfc62)  
-若要个性化修改报表组件，对views文件夹里的StudentView和ClassView直接修改即可  
-里面的index.vue是组件入口文件，IncomeForm.vue是表单输入组件（用于新增数据）,Record***List.vue是表格展示组件，SearchLine是查询信息录入组件
-若想多开一个自己的报表组件，请直接复制StudentView文件并修改相应名称作为新的报表组件，
-在router文件夹里的index.ts文件里新增新报表组件的index.vue相对路径，再到components文件夹里的Header.vue组件里面修改导航对象信息  
+   * 若要个性化修改报表组件，对views文件夹里的StudentView和ClassView直接修改即可
+   * 里面的index.vue是组件入口文件，IncomeForm.vue是表单输入组件（用于新增数据）,Record***List.vue是表格展示组件，SearchLine是查询信息录入组件
+   * 若想多开一个自己的报表组件，请直接复制StudentView文件并修改相应名称作为新的报表组件，在router文件夹里的index.ts文件里新增新报表组件的index.vue相对路径，再到components文件夹里的Header.vue组件里面修改导航对象信息  
 ![image](https://github.com/user-attachments/assets/b7404cfa-0167-4f49-80cb-271284c9c4ef)
 ![bb1440e2-70ec-4679-ade8-52b9f90b348f(1)](https://github.com/user-attachments/assets/0cd243e7-3842-4e97-8e42-0082e1348bae)
 
