@@ -136,7 +136,8 @@ onMounted(loading_all_SCInfo);
     display: grid;
     grid-template-columns: 1fr 2fr;
     user-select: none;
-    min-height: 80%;
+    height: 100%;
+    width: 100%;
     column-gap: 50px;
 
     .income {

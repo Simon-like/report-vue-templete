@@ -121,11 +121,13 @@ onMounted(loading_all_studentInfo);
 
 <style lang="scss" scoped>
 .simon-content {
-    padding: 40px;
+    padding: 20px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     column-gap: 50px;
     user-select: none;
+    height: 100%;
+    width: 100%;
 
     .income {
         justify-content: center;
