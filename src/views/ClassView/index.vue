@@ -141,7 +141,7 @@ onMounted(loading_all_SCInfo);
 
     .income {
         justify-content: center;
-        gap: 60px;
+        gap: 20px;
         padding: 50px;
         border: 2px solid #fff;
         box-shadow: -10px -10px 10px rgba(0, 0, 0, .3);

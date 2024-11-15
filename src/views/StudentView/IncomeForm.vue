@@ -196,7 +196,7 @@ const onChooseCollege = (idstr: string) => {
     color: rgba(0, 0, 0, 0.699);
     text-transform: uppercase;
     transition: all 0.3s;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .big-cta-btn:hover {
