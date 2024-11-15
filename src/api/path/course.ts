@@ -11,7 +11,7 @@ import type { SCInfo } from "@/types/databaseWeb";
  * @returns
  */
 async function getSCInfo__ByCourse(course_id: string): ApiResponse<SCInfo[]> {
-  return await Get<SCInfo[]>(`/sc?course_id=${course_id}`);
+  return await Get<SCInfo[]>(`/scc?course_id=${course_id}`);
 }
 
 /**
@@ -20,7 +20,7 @@ async function getSCInfo__ByCourse(course_id: string): ApiResponse<SCInfo[]> {
  * @returns
  */
 async function getSCInfo__ByStudent(student_id: string): ApiResponse<SCInfo[]> {
-  return await Get<SCInfo[]>(`/sc?student_id=${student_id}`);
+  return await Get<SCInfo[]>(`/scs?student_id=${student_id}`);
 }
 
 /**
@@ -50,8 +50,8 @@ async function postSCInfo(data: SCForm) {
  * @param id ID
  * @returns
  */
-async function deleteSCInfo(id: string) {
-  return await Delete(`/sc?id=${id}`);
+async function deleteSCInfo(id: number) {
+  return await Delete(`/sc/${id}`);
 }
 
 export const SCApi = {

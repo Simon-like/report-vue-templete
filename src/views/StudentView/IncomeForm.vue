@@ -2,13 +2,16 @@
 /**
  * @description 表单录入组件
  */
-import { ref, onMounted, defineEmits, reactive } from 'vue'
+import { ref, onMounted, defineEmits, reactive, useTemplateRef } from 'vue'
 import { clearInput, debounce } from '@/utils/tools';
 import type { StudentInfo } from '@/types/databaseWeb';
 
 import { ElMessage, type ComponentSize, type FormInstance, type FormRules } from 'element-plus'
 
 
+onMounted(() => {
+    clearInput();// 消除浏览器输入框自带的记忆功能
+});
 // 表单数据
 const form = ref<StudentInfo>({
     student_id: '',
@@ -19,7 +22,7 @@ const form = ref<StudentInfo>({
 });
 
 const formSize = ref<ComponentSize>('default')
-const ruleFormRef = ref<FormInstance>()
+const ruleFormRef = useTemplateRef('ruleForm')//获取form表单dom元素
 
 //校验规则
 const rules = reactive<FormRules<StudentInfo>>({
@@ -55,10 +58,9 @@ const rules = reactive<FormRules<StudentInfo>>({
 
 })
 
-
+//重置表单
 const resetForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return
-    //formEl.resetFields();
     form.value.student_id = '';
     form.value.student_name = '';
     form.value.sex = -1;
@@ -66,12 +68,9 @@ const resetForm = (formEl: FormInstance | undefined) => {
     form.value.major_id = '';
 }
 
+
+
 const emits = defineEmits(['submit']);
-
-onMounted(() => {
-    clearInput();// 消除浏览器输入框自带的记忆功能
-});
-
 
 /**
  * 提交记录,做防抖处理
@@ -149,7 +148,7 @@ const onChooseCollege = (idstr: string) => {
 </script>
 
 <template>
-    <el-form :model="form" @submit.prevent="addRecord__debounce(ruleFormRef)" ref="ruleFormRef" :rules="rules"
+    <el-form :model="form" @submit.prevent="addRecord__debounce(ruleFormRef)" ref="ruleForm" :rules="rules"
         class="demo-ruleForm" :size="formSize" status-icon>
         <el-form-item prop="student_id">
             <p slot="label" style="color:#fff;font-size: 18px;">学号</p>

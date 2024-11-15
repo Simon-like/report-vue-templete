@@ -18,7 +18,7 @@ async function getStudentInfo__ByType(
   college_id: string = ""
 ): ApiResponse<StudentInfo[]> {
   return await Get<StudentInfo[]>(
-    `/student?major_id=${major_id}&department_id=${department_id}&college_id=${college_id}`
+    `/student1?major_id=${major_id}&department_id=${department_id}&college_id=${college_id}`
   );
   //对于get请求通常使用路径参数，delete同；
   //ApiResponse<T>定义的是返回数据类型，没有就不填，里面的<T>和Get方法前的<T>的泛型类型请保持一致

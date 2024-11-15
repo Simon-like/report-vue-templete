@@ -5,11 +5,11 @@ const props = defineProps<{
     records: StudentInfo[]
 }>()
 
-const emits = defineEmits(['delete'])
+const emits = defineEmits(['delete']);
 
 const handleDelete = (index: number) => {
     emits('delete', props.records[index].student_id);
-}
+};
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const handleDelete = (index: number) => {
         <el-table-column prop="student_id" label="学号" />
         <el-table-column prop="student_name" label="姓名" />
         <el-table-column prop="sex_name" label="性别" />
-        <el-table-column prop="major_id" label="院系" />
+        <el-table-column prop="major_id" label="专业" />
         <el-table-column prop="college_id" label="学院" />
         <el-table-column label="Operations">
             <template #default="scope">

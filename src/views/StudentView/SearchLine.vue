@@ -5,19 +5,27 @@ import { clearInput } from '@/utils/tools';
 onMounted(() => {
     clearInput();
 });
+
+//输入项数据
 const searchForm = reactive({
-    student_id: '',
-    major_name: '',
-    college_name: '',
+    major_id: '',
+    department_id: '',
+    college_id: '',
 });
+
+const emits = defineEmits(['search']);
+
+const onSearch = () => {
+    emits('search', searchForm);
+};
 </script>
 
 <template>
     <div class="x-wrapper">
-        <el-input v-model="searchForm.student_id" placeholder="学号查询" />
-        <el-input v-model="searchForm.major_name" placeholder="院系查询" />
-        <el-input v-model="searchForm.college_name" placeholder="学院查询" />
-        <button class="big-cta-btn" type="submit">一键查询</button>
+        <el-input v-model="searchForm.major_id" placeholder="按专业查询" />
+        <el-input v-model="searchForm.department_id" placeholder="按院系查询" />
+        <el-input v-model="searchForm.college_id" placeholder="按学院查询" />
+        <button class="big-cta-btn" type="submit" @click="onSearch">一键查询</button>
     </div>
 </template>
 

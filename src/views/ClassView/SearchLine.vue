@@ -6,6 +6,10 @@ onMounted(() => {
     clearInput();
 });
 
+
+const emits = defineEmits(['search_all', 'search_byCourse', 'search_byStudent']);
+
+//查询ID
 const searchID = ref<string>('');
 
 // 查询索引,0查学生,1查课程
@@ -13,15 +17,34 @@ const searchIndex = ref<number>(0);
 const onSwitch = () => {
     searchIndex.value = +!searchIndex.value
 }
+
+// 查询全部
+const onSearchALL = () => {
+    searchID.value = '';
+    emits('search_all');
+
+};
+//按ID查询
+const onSearchByType = () => {
+    if (searchIndex.value === 0) {
+        //按学号查询
+        emits('search_byStudent', searchID.value);
+    }
+    if (searchIndex.value === 1) {
+        //按课程ID查询
+        emits('search_byCourse', searchID.value);
+    }
+} 
 </script>
 
 <template>
     <div class="x-wrapper">
         <el-tooltip class="box-item" effect="dark" content="点击可切换" placement="top">
-            <button @click="onSwitch" class="big-cta-btn switch">{{ searchIndex ? '查课程' : '查学生' }}</button>
+            <button @click="onSwitch" class="big-cta-btn switch">{{ searchIndex ? '去查课程' : '去查学生' }}</button>
         </el-tooltip>
         <el-input v-model="searchID" :placeholder="searchIndex ? '请输入课程id' : '请输入学生id'" />
-        <button class="big-cta-btn" type="submit">一键查询</button>
+        <button class="big-cta-btn" type="submit" @click="onSearchByType">一键查询</button>
+        <button class="big-cta-btn all" type="submit" @click="onSearchALL">返回所有</button>
     </div>
 </template>
 
@@ -50,10 +73,24 @@ const onSwitch = () => {
         color: #FFF;
         background: $bg-gray-color;
         flex: 1;
+    }
 
-        &:hover {
-            color: #000;
-        }
+    &.all {
+        background: $bg-red-color;
+        max-width: 150px;
+        color: #FFF;
+    }
+
+    &:hover {
+        color: #000;
+        transform: scale(1.02);
+    }
+
+    &:active {
+        color: #fff;
+        background: transparent !important;
+        border: 1px solid #fff;
+        transform: scale(0.96);
     }
 }
 

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * @description 学生信息管理入口界面
+ */
 import { nextTick, onMounted, ref } from 'vue';
 import IncomeForm from './IncomeForm.vue';
 import RecordStudentList from './RecordStudentList.vue';
@@ -7,6 +10,7 @@ import { api } from '@/api/index';
 import type { StudentInfo } from '@/types/databaseWeb';
 import { ElMessage } from 'element-plus';
 
+// 表格数据
 const recordsList = ref<{
     student_id: string
     student_name: string
@@ -28,27 +32,38 @@ const onSubmit = async (data: StudentInfo) => {
     }
 }
 
+
+/**
+ * 响应数据格式化
+ * @param res 响应返回的学生信息数组
+ */
+function records_formatting(res: StudentInfo[]) {
+    recordsList.value = []
+    res.forEach(item => {
+        let sex_name = '';
+        switch (item.sex) {
+            case 0:
+                sex_name = '男性';
+                break;
+            case 1:
+                sex_name = '女性';
+                break;
+            case -1:
+                sex_name = '武装直升机';
+                break;
+            default:
+                sex_name = '未知性别者';
+                break;
+        }
+        recordsList.value.push({ ...item, sex_name });
+    })//获取数据转化格式
+}
+
 //加载全部学生信息
 const loading_all_studentInfo = async () => {
     const res = await api.getStudentInfo__All();
     if (res.code === 1) {
-        nextTick(() => Object.assign(recordsList.value, res.data));
-        recordsList.value.forEach(item => {
-            switch (item.sex) {
-                case 0:
-                    item.sex_name = '男性';
-                    break;
-                case 1:
-                    item.sex_name = '女性';
-                    break;
-                case -1:
-                    item.sex_name = '武装直升机';
-                    break;
-                default:
-                    item.sex_name = '未知性别者';
-                    break;
-            }
-        })
+        records_formatting(res.data);
     } else {
         ElMessage.error(res.msg);
     }
@@ -59,13 +74,30 @@ const onDelete = async (id: string) => {
     const res = await api.deleteStudentInfo(id);
     if (res.code === 1) {
         ElMessage.success('删除成功！');
-        recordsList.value = [];
         await loading_all_studentInfo();
-        console.log(recordsList.value);
     } else {
         ElMessage.error(res.msg);
     }
 }
+
+interface SearchData {
+    major_id: string
+    department_id: string
+    college_id: string
+}
+
+//按类型查询学生信息
+const onSearch = async (data: SearchData) => {
+    const res = await api.getStudentInfo__ByType(data.major_id, data.department_id, data.college_id);
+    if (res.code === 1) {
+        records_formatting(res.data);
+        ElMessage.success('查询成功！');
+    } else {
+        ElMessage.error(res.msg);
+    }
+};
+
+//进入页面时加载所有数据
 onMounted(loading_all_studentInfo);
 </script>
 
@@ -78,7 +110,7 @@ onMounted(loading_all_studentInfo);
                     <IncomeForm @submit="onSubmit" />
                 </div>
                 <div class="y-wrapper">
-                    <SearchLine />
+                    <SearchLine @search="onSearch" />
                     <RecordStudentList :records="recordsList" @delete="onDelete" />
                 </div>
             </div>
